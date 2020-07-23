@@ -1,6 +1,7 @@
 import Entities.Client;
 import Entities.Enum.OrderStatus;
 import Entities.Order;
+import Entities.OrderItem;
 import Entities.Product;
 
 import java.text.ParseException;
@@ -16,25 +17,30 @@ public class Main {
         Locale.setDefault(Locale.US);
         Scanner input = new Scanner(System.in);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-        System.out.println("Enter client data: ");
+
+        System.out.println("Enter client data:");
         System.out.print("Name: ");
-        String clientName = input.next();
+        String clientName = input.nextLine();
 
-        System.out.print("\nEmail: ");
+        System.out.print("Email: ");
         String clientEmail = input.next();
 
-        System.out.print("\nBirth date (DD/MM/YYYY): ");
+        input.nextLine();
+
+        System.out.print("Birth date (DD/MM/YYYY): ");
         Date clientBirthDate = simpleDateFormat.parse(input.next());
 
         Client client = new Client(
                 clientName,
                 clientEmail,
                 clientBirthDate
-                );
+        );
 
-        System.out.println("Enter order data: ");
-
+        System.out.println("Enter order data:");
+        System.out.print("Status: ");
+        OrderStatus status = OrderStatus.valueOf(input.next());
 
         Order order1 = new Order(
                 new Date(),
@@ -48,12 +54,10 @@ public class Main {
         for (int i = 0; i < numberOfItems; i++) {
             System.out.printf("Enter #%d item data:%n", i + 1);
 
-            Integer quantity;
-
-            System.out.print("\nProduct Name: ");
+            System.out.print("Product Name: ");
             String productName = input.next();
 
-            System.out.print("\nProduct Price: ");
+            System.out.print("Product Price: ");
             Double productPrice = input.nextDouble();
 
             Product product = new Product(
@@ -61,10 +65,21 @@ public class Main {
                     productPrice
             );
 
-            order1.addOrderItems();
+            System.out.print("Quantity: ");
+            Integer quantity = input.nextInt();
+            input.nextLine();
+
+            OrderItem orderItem = new OrderItem(
+                    quantity,
+                    product.getPrice(),
+                    product
+            );
+
+            order1.addOrderItems(orderItem);
         }
 
-
+        System.out.println("\nORDER SUMMARY:");
+        System.out.println(order1);
 
     }
 }

@@ -2,23 +2,24 @@ package Entities;
 
 import Entities.Enum.OrderStatus;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Order {
+    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyy HH:mm:ss");
+
+    /*
+     * An order has multiple OrderItems
+     * */
+    private final List<OrderItem> items = new ArrayList<>();
     private Date moment;
     private OrderStatus status;
-
     /*
-    * An order has one client
-    * */
+     * An order has one client
+     * */
     private Client client;
-
-    /*
-    * An order has multiple OrderItems
-    * */
-    private List<OrderItem> orderItems = new ArrayList<>();
 
     public Order() {
     }
@@ -53,15 +54,44 @@ public class Order {
         this.client = client;
     }
 
-    public List<OrderItem> getOrderItems() {
-        return orderItems;
+    public List<OrderItem> getItems() {
+        return items;
     }
 
     public void addOrderItems(OrderItem orderItems) {
-        this.orderItems.add(orderItems);
+        this.items.add(orderItems);
     }
 
     public void removeOrderItems(OrderItem orderItems) {
-        this.orderItems.remove(orderItems);
+        this.items.remove(orderItems);
+    }
+
+    public Double getTotal() {
+        double total = 0;
+
+        for (OrderItem item :
+                items) {
+            total += item.subTotal();
+        }
+
+        return total;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Order moment: ").append(simpleDateFormat.format(moment));
+        stringBuilder.append("\nOrder status: ").append(status);
+        stringBuilder.append("\n").append(client).append("\n");
+
+        stringBuilder.append("Order items:\n");
+        for (OrderItem item : items) {
+            stringBuilder.append(item).append("\n");
+        }
+
+        stringBuilder.append("Total price: $").append(getTotal());
+
+        return stringBuilder.toString();
     }
 }
+

@@ -45,4 +45,15 @@ public class OrderItem {
     public Double subTotal() {
         return quantity * price;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(product).append(", ");
+        stringBuilder.append("Quantity: ").append(getQuantity()).append(", ");
+        stringBuilder.append("Subtotal: $").append(subTotal());
+
+        return stringBuilder.toString();
+    }
 }
