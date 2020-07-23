@@ -1,12 +1,27 @@
-# java-compostion_Ex3
+# [java-compostion_Ex3](https://www.udemy.com/course/java-curso-completo)
 Exercise about enumeration and composition
 
-### Objetivo: 
-Ler os dados de um pedido com N itens (N fornecido pelo usuário). Depois, mostrar um sumário do pedido conforme exemplo (próxima página). Nota: o instante do pedido deve ser o instante do sistema: new Date().
+**- seção 13: Enumeratio and Composition**
 
-### Estrutura UML
-<p>
+### Objective: 
+Read the data from an order with N items ('N' is set by the user). Then, show a sumary 
+as shown in the 'example' below.
 
+The instant of the order should be the same of the system: new Date()
+
+## System model - uml
+<p align="center">
+  <img src="uml.png" width="600" title="program structure">
 </p>
 
-### Exemplo
+### Objects
+<p align="center">
+  <img src="/objects_memory.png" width="600" title="program structure">
+</p>
+
+## Example
+<p align="center">
+    <img src="example.png"/>
+</p>
+
+
