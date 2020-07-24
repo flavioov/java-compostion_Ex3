@@ -27,7 +27,7 @@ public class Main {
         System.out.print("Email: ");
         String clientEmail = input.next();
 
-        input.nextLine();
+        input.nextLine();itory
 
         System.out.print("Birth date (DD/MM/YYYY): ");
         Date clientBirthDate = simpleDateFormat.parse(input.next());
